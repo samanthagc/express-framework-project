@@ -17,6 +17,21 @@ app.post('/users', (req, res) => {
    res.send (`Informação recebida com sucesso. Seja bem vindo ${dados.nome}`)
 })
 
+app.get ('/users/:nome', (req, res) => {
+   res.send (`Olá ${req.params.nome} - cidade: ${req.query.cidade}`)
+})
+
+app.get ('/dados', (req, res) => {
+   res.format ({
+      'text/html': () => {
+         res.send ('<h1>Olá</h1>')
+      },
+      'application/json': () => {
+         res.send ({message: 'Olá'})
+      }
+   })
+})
+
 app.listen (3000, () => {
    console.log ('Server is running on http://localhost:3000')
 })
