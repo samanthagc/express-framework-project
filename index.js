@@ -12,6 +12,7 @@ app.use (express.json())
 app.use ('/site', express.static ('public'))
  
 app.post('/users', (req, res) => {
+   console.log(req.get('Content-Type'))
    dados = req.body
    console.log(dados)
    res.send (`Informação recebida com sucesso. Seja bem vindo ${dados.nome}`)
@@ -22,14 +23,21 @@ app.get ('/users/:nome', (req, res) => {
 })
 
 app.get ('/dados', (req, res) => {
-   res.format ({
-      'text/html': () => {
-         res.send ('<h1>Olá</h1>')
-      },
-      'application/json': () => {
-         res.send ({message: 'Olá'})
-      }
-   })
+   console.log(req.get('Content-Type'))
+   if (req.accepts('application/json')) {
+      res.send ({message: 'Olá amigo JSON'})
+   }
+   else {
+      res.send('<h1>Olá</h1>')
+   }
+   //res.format ({
+   //   'text/html': () => {
+   //      res.send ('<h1>Olá</h1>')
+   //   },
+   //   'application/json': () => {
+   //      res.send ({message: 'Olá'})
+   //   }
+   //})
 })
 
 app.listen (3000, () => {
