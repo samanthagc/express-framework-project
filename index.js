@@ -18,8 +18,8 @@ app.post('/users', (req, res) => {
    res.send (`Informação recebida com sucesso. Seja bem vindo ${dados.nome}`)
 })
 
-app.get ('/users/:nome', (req, res) => {
-   res.send (`Olá ${req.params.nome} - cidade: ${req.query.cidade}`)
+app.get ('/users/site', (req, res) => {
+   res.redirect('/site')
 })
 
 app.get ('/dados', (req, res) => {
